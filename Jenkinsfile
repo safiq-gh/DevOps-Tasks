@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Image') {
             steps {
                 sh 'docker build -t AppFromJenkins .'
@@ -23,7 +17,7 @@ pipeline {
                         --name AppFromJenkins \
                         --restart unless-stopped \
                         -p 8090:80 \
-                        myapp
+                        AppFromJenkins
                 '''
             }
         }
