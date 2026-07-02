@@ -4,20 +4,20 @@ pipeline {
     stages {
         stage('Build Image') {
             steps {
-                sh 'docker build -t AppFromJenkins .'
+                sh 'docker build -t appfromjenkins .'
             }
         }
 
         stage('Deploy') {
             steps {
                 sh '''
-                    docker rm -f AppFromJenkins || true
+                    docker rm -f appfromjenkins || true
 
                     docker run -d \
-                        --name AppFromJenkins \
+                        --name appfromjenkins \
                         --restart unless-stopped \
                         -p 8090:80 \
-                        AppFromJenkins
+                        appfromjenkins
                 '''
             }
         }
